@@ -1,0 +1,90 @@
+body {
+    background-image: url('../img/freevbucks.jpg');
+    background-repeat: no-repeat;
+}
+
+.nav-wrapper{
+	width: 75vw;
+	height: 7.5vh;
+	align-items: center;
+	justify-content: right;
+	display: flex;
+	gap: 1.5vw;
+}
+
+.button-toggle{
+	width: 10vw;
+	height: 5vh;
+	border-radius: 0.5rem;
+	color: rgb(255, 255, 255);
+	font-size: 20px;
+	font-family: "Atop";
+    background-color: black;
+    background-size: cover; /* Sørger for at bildet dekker hele området */
+}
+
+.button-toggle:hover{
+	transform: scale(1.15);
+}
+
+body.normal-mode {
+    background-image: url('../img/freevbucks.jpg'); /* Light mode background image */
+}
+
+body.sigma-mode {
+    background-image: url('../img/jonkler.jpg'); /* Dark mode background image */
+}
+
+
+.login-container {
+    background-color: #8d0e0e44;
+    padding: 40px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 3px solid rgba(0, 0, 0, 0.671);
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px gray;
+    position: absolute;
+    right: 5vw;
+    margin-left: 5vw;
+}
+.login-container:hover {
+    background-color: #8609097c;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #45a049;
+}
+
+#bouncing-image-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px; /* Adjust height as needed */
+}
+
+#bouncing-image {
+    position: absolute;
+    width: 250px; /* Adjust size as needed */
+    height: 150px; /* Adjust size as needed */
+}
