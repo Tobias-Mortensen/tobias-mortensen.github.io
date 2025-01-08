@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routing til ulike filer, legg inn egne ved å kopiere en av app.get-funkjonene
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'view', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/vbucks', (req, res) => {
