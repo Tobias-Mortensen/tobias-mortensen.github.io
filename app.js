@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/vbucks', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'view', 'kamel.html'));
+    res.sendFile(path.join(__dirname, 'kamel.html'));
 });
 
 // Eksempel routing når noen skriver /hei inn i url-linjen får de Yo tilbake
