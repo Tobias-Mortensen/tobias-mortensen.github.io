@@ -181,3 +181,10 @@ table {
 	font-family: Impact;
 	background-image: url(../img/black-ninja.png);
 }
+.ninja {
+	font-size: 40px;
+	text-decoration: none;
+	color: rgb(21, 255, 0);
+	font-family: Impact;
+	background-image: url(../img/black-ninja.png);
+}
