@@ -174,3 +174,10 @@ table {
     border-radius: 10px;
 }
 
+.ninja {
+	font-size: 40px;
+	text-decoration: none;
+	color: aliceblue;
+	font-family: Impact;
+	background-image: url(../img/black-ninja.png);
+}
