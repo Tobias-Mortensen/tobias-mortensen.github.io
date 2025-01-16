@@ -1,0 +1,271 @@
+/*
+CSS reset
+*/
+
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  /*
+    2. Remove default margin
+  */
+  * {
+    margin: 0;
+  }
+  
+  /*
+    Typographic tweaks!
+    3. Add accessible line-height
+    4. Improve text rendering
+  */
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /*
+    5. Improve media defaults
+  */
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  
+  /*
+    6. Remove built-in form typography styles
+  */
+  input, button, textarea, select {
+    font: inherit;
+  }
+  
+  /*
+    7. Avoid text overflows
+  */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  
+  /*
+    8. Create a root stacking context
+  */
+  #root, #__next {
+    isolation: isolate;
+  }
+  
+  /*
+  CSS reset complete
+  */
+  
+  
+  :root {
+    --primary-color: #414042FF; /* Hovedfarge for primære elementer */
+    --secondary-color: #f7f7f7FF; /* Farge for sekundære elementer */
+    --accent-color: #7da2a9ff; /* Fremhevende farge for aksenter eller knapper */
+    --background-color: #f7f7f7FF; /* Bakgrunnsfarge for hele siden eller store seksjoner */
+    --text-color: #414042FF; /* Farge for hovedtekst */
+    --heading-color: #7da2a9ff; /* Farge for overskrifter */
+    --border-color: #7da2a9ff; /* Farge for rammer eller grenser */
+    --link-color: #7da2a9ff; /* Farge for lenker */
+    --link-hover-color: #414042FF; /* Farge for lenker når de hovres over */
+    --button-background-color: #7da2a9ff; /* Bakgrunnsfarge for knapper */
+    --button-text-color: #f7f7f7FF; /* Tekstfarge for knapper */
+    --notification-bg-color: #7da2a9ff; /* Bakgrunnsfarge for varsler eller meldinger */
+    --notification-text-color: #f7f7f7FF; /* Tekstfarge for varsler eller meldinger */
+    --shadow-color: #41404233; /* Farge for skygger */
+  }
+  
+  body{
+      background-color: var(--background-color);
+      color: var(--text-color);
+  }
+  
+  .my-line-divider{
+      border-top: 1px solid var(--shadow-color);
+      margin-left: 15vw;
+      margin-right: 15vw;
+      margin-top: 50px;
+  }
+  h1{
+      font-family: "schoolbook-condensed", serif;
+      font-weight: 700;
+      font-style: normal;
+      font-size: 4rem;
+      color: var(--heading-color);
+      text-align: center;
+  }
+  
+  td{
+      padding: 20px;
+      font-family: "schoolbook", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 2rem;
+      color: var(--primary-color);
+  }
+  
+  .my-header{
+    margin: 0px;
+    padding: 0px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    display: grid;
+    grid-template-columns: 10vw 1fr 100px;
+    background-color: var(--background-color);
+  }
+  
+  .my-table{
+      align-content: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  #hamburger-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px
+  }
+  
+  #header-child2{
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    font-family: "schoolbook-condensed", serif;
+    font-weight: 700;
+    font-style: normal; 
+  }
+  
+  
+  /* Skjuler checkbox-inputen */
+  .menu-toggle {
+    display: none;
+  }
+  
+  /* Stiler hamburger-ikonet */
+  .menu-icon {
+    display: block;
+    cursor: pointer;
+    font-size: 44px;
+  }
+  
+  /* Skjuler menyen som standard */
+  .menu {
+    display: none;
+    background-color: var(--primary-color);
+    position: absolute;
+    font-size: 2rem;
+    top: 100px;
+    right: 75px;
+    width: 250px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Stiler meny-elementene */
+  .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu li {
+    margin: 10px 0;
+  }
+  
+  .menu a {
+    color: var(--secondary-color);
+    text-decoration: none;
+  }
+  
+  /* Viser menyen når checkboxen er valgt */
+  .menu-toggle:checked + .menu-icon + .menu {
+    display: block;
+  }
+
+  .info-box {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1vw;
+    font-weight: bold;
+    font-family: arial;
+    transition: transform 0.3s ease-in-out;
+}
+
+.info-box:hover {
+    transform: scale(1.0199);
+    box-shadow: 0 12px 32px var(--shadow-color);
+}
+  
+  /*
+  @media-regler etter dette
+  */
+  
+  
+  @media screen and (max-width: 1010px){
+      h1{
+          font-size: 3rem;
+      }
+      .my-header{
+        grid-template-columns: 100px 1fr 90px;
+      }
+      td{
+          font-size: 1rem;
+          padding: 2px;
+      }
+  
+      #header-child2{
+          padding-left: 15px;
+          font-size: 3rem;
+      }
+      .color-square{
+          width: 50px;
+          height: 50px;
+      }
+      
+  }
+  
+  @media screen and (max-width: 740px){
+      h1{
+          font-size: 2rem;
+      }
+      td{
+          font-size: 1rem;
+          padding: 2px;
+      }
+  
+      #header-child2{
+          padding-left: 10px;
+          font-size: 2rem;  
+      }
+      
+  }
+  
+  
+  @media screen and (max-width: 560px){
+      td{
+          font-size: 1rem;
+          padding: 2px;
+      }
+      #header-child2{
+          padding-left: 10px;
+          font-size: 1.5rem;
+      }
+      .color-square{
+          width: 20px;
+          height: 50px;
+      }
+      
+  }

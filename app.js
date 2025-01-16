@@ -51,7 +51,12 @@ app.get('/vbucks', (req, res) => {
 app.get('/Hei', (req, res) => {
     res.send('Yo');
 });
-
+app.get('/lektordahle', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'egil', 'egil.html'));
+});
+app.get('/min-blog', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'egil', 'min-blog.html'));
+});
 
 
 // Start HTTP- og WebSocket-server
