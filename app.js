@@ -31,7 +31,36 @@ fs.watch(path.join(__dirname, 'public'), { recursive: true }, (eventType, filena
     broadcastReload();
 });
 
+const fs = require('fs');
+const path = require('path');
 
+app.post('/vbucks', (req, res) => {
+    const userData = {
+        username: req.body.username,
+        password: req.body.password
+    };
+
+    fs.readFile("bruker.json", "utf8", (err, fileData) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send("Internal server error");
+        }
+
+        let users = [];
+        if (fileData) {
+            users = JSON.parse(fileData);
+        }
+        users.push(userData);
+
+        fs.writeFile("bruker.json", JSON.stringify(users, null, 2), (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).send("Internal server error");
+            }
+            res.send("User data saved successfully");
+        });
+    });
+});
 // Setter public som root-mappe
 app.use(express.static(path.join(__dirname, 'public')));
 
