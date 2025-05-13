@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fancy Roulette Wheel Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1a202c; /* Dark background for a casino feel */
+            color: #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Align to top */
+            min-height: 100vh;
+            padding-top: 20px;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column; /* Main layout: wheel, then controls */
+            align-items: center;
+            width: 100%;
+            max-width: 1200px; /* Limit overall width */
+            padding: 20px;
+        }
+
+        .wheel-area {
+            position: relative;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #wheel-container {
+            position: relative;
+            width: 450px; /* Increased size */
+            height: 450px;
+        }
+
+        #wheel {
+            width: 100%;
+            height: 100%;
+            border: 10px solid #4a3b2a; /* Wooden-like border */
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            background-color: #2d3748; /* Darker inner wheel */
+            box-shadow: 0 0 25px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.7);
+            transition: transform 7s cubic-bezier(0.25, 0.1, 0.25, 1); /* Slower, smoother spin */
+        }
+
+        .wheel-segment { /* This class is no longer used for drawing segments, but kept for potential future use */
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            left: 50%;
+            top: 0;
+            transform-origin: 0% 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .segment-text { /* This class is no longer used, but kept for potential future use */
+            transform: rotate(-67.5deg) translateY(-100px) ;
+            display: block;
+            text-align: center;
+        }
+
+        #pointer {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 30px solid #ffd700; /* Gold pointer */
+            position: absolute;
+            top: -35px; /* Position above the wheel */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.7));
+        }
+
+        .controls-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .info-panel {
+            background-color: rgba(45, 55, 72, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .info-panel h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #f7fafc;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #c53030;
+            padding-bottom: 10px;
+        }
+
+        .balance-display, .message-display {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin: 10px 0;
+        }
+        .balance-display span, .message-display span {
+            color: #68d391; /* Green for positive emphasis */
+            font-weight: 700;
+        }
+        .message-display.win span { color: #68d391; }
+        .message-display.loss span { color: #fc8181; } /* Red for loss */
+        .message-display.info span { color: #63b3ed; } /* Blue for info */
+
+
+        .betting-section {
+            background-color: rgba(74, 85, 104, 0.7);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            width: 100%;
+            max-width: 800px; /* Wider betting section */
+        }
+
+        .betting-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            color: #e2e8f0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .bet-options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .bet-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            background-color: rgba(26, 32, 44, 0.6);
+            border-radius: 8px;
+            border: 1px solid #4a5568;
+        }
+
+        .bet-option label {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: #a0aec0;
+        }
+
+        .bet-option select, .bet-option input[type="number"], .bet-option input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #4a5568;
+            background-color: #2d3748;
+            color: #e2e8f0;
+            font-size: 1rem;
+        }
+         .bet-option input[type="number"] {
+            -moz-appearance: textfield; /* Firefox */
+        }
+        .bet-option input[type="number"]::-webkit-outer-spin-button,
+        .bet-option input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+        }
+
+        .action-buttons button, #spinButtonElement {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        #spinButtonElement {
+            background-color: #c53030; /* Red spin button */
+            color: white;
+        }
+        #spinButtonElement:hover:not(:disabled) {
+            background-color: #9b2c2c;
+            transform: translateY(-2px);
+        }
+        #spinButtonElement:disabled {
+            background-color: #718096;
+            cursor: not-allowed;
+        }
+
+        #addBetButton {
+            background-color: #38a169; /* Green add bet button */
+            color: white;
+        }
+        #addBetButton:hover {
+            background-color: #2f855a;
+            transform: translateY(-2px);
+        }
+
+        #clearBetsButton {
+            background-color: #dd6b20; /* Orange clear bets button */
+            color: white;
+        }
+        #clearBetsButton:hover {
+            background-color: #c05621;
+            transform: translateY(-2px);
+        }
+
+
+        .current-bets-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(45, 55, 72, 0.8);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 600px;
+        }
+        .current-bets-section h4 {
+            font-size: 1.25rem;
+            color: #cbd5e0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        #currentBetsList {
+            list-style: none;
+            padding: 0;
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 0.95rem;
+        }
+        #currentBetsList li {
+            padding: 6px 0;
+            border-bottom: 1px solid #4a5568;
+            color: #a0aec0;
+        }
+        #currentBetsList li:last-child {
+            border-bottom: none;
+        }
+
+        /* Custom scrollbar for bets list */
+        #currentBetsList::-webkit-scrollbar {
+            width: 8px;
+        }
+        #currentBetsList::-webkit-scrollbar-track {
+            background: #2d3748;
+            border-radius: 4px;
+        }
+        #currentBetsList::-webkit-scrollbar-thumb {
+            background: #4a5568;
+            border-radius: 4px;
+        }
+        #currentBetsList::-webkit-scrollbar-thumb:hover {
+            background: #718096;
+        }
+
+        /* Adding a 'back' link if needed */
+        .roulette-link {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            background-color: rgba(45, 55, 72, 0.7);
+            border-radius: 6px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        .roulette-link:hover {
+            color: #e2e8f0;
+            background-color: rgba(74, 85, 104, 0.9);
+        }
+
+    </style>
+</head>
+<body>
+    <a href="/" class="roulette-link">Back to Main (Example)</a>
+
+    <div class="game-container">
+        <div class="wheel-area">
+            <div id="wheel-container">
+                <div id="pointer"></div>
+                <div id="wheel">
+                    </div>
+            </div>
+        </div>
+
+        <div class="controls-area">
+            <div class="info-panel">
+                <h2>Roulette Royale</h2>
+                <div class="balance-display">Balance: $<span id="balanceAmount">1000</span></div>
+                <div id="message" class="message-display"><span>Place your bets!</span></div>
+            </div>
+
+            <div class="betting-section">
+                <h3>Place Your Bets</h3>
+                <div class="bet-options-grid">
+                    <div class="bet-option">
+                        <label for="betType">Bet Type:</label>
+                        <select id="betType" name="betType">
+                            <option value="number">Specific Number</option>
+                            <option value="red">Red</option>
+                            <option value="black">Black</option>
+                            <option value="even">Even</option>
+                            <option value="odd">Odd</option>
+                            <option value="low">Low (1-18)</option>
+                            <option value="high">High (19-36)</option>
+                            <option value="dozen1">1st Dozen (1-12)</option>
+                            <option value="dozen2">2nd Dozen (13-24)</option>
+                            <option value="dozen3">3rd Dozen (25-36)</option>
+                            <option value="col1">Column 1</option>
+                            <option value="col2">Column 2</option>
+                            <option value="col3">Column 3</option>
+                        </select>
+                    </div>
+
+                    <div class="bet-option" id="specificNumberBetOption">
+                        <label for="specificNumber">Number (0-36):</label>
+                        <input type="number" id="specificNumber" name="specificNumber" min="0" max="36" value="0">
+                    </div>
+
+                    <div class="bet-option">
+                        <label for="betAmount">Bet Amount ($):</label>
+                        <input type="number" id="betAmount" name="betAmount" min="1" value="10">
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="addBetButton">Add Bet</button>
+                    <button id="clearBetsButton">Clear All Bets</button>
+                </div>
+
+                <div class="current-bets-section">
+                    <h4>Current Bets for this Spin:</h4>
+                    <ul id="currentBetsList">
+                        </ul>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                 <button id="spinButtonElement">Spin the Wheel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- ROULETTE WHEEL CONFIGURATION ---
+        const ROULETTE_NUMBERS = [
+            0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26
+        ];
+        const NUMBER_COLORS = {
+            0: 'green',
+            1: 'red', 2: 'black', 3: 'red', 4: 'black', 5: 'red', 6: 'black', 7: 'red', 8: 'black', 9: 'red', 10: 'black',
+            11: 'black', 12: 'red', 13: 'black', 14: 'red', 15: 'black', 16: 'red', 17: 'black', 18: 'red', 19: 'red',
+            20: 'black', 21: 'red', 22: 'black', 23: 'red', 24: 'black', 25: 'red', 26: 'black', 27: 'red', 28: 'black',
+            29: 'black', 30: 'red', 31: 'black', 32: 'red', 33: 'black', 34: 'red', 35: 'black', 36: 'red'
+        };
+        const SEGMENT_ANGLE = 360 / ROULETTE_NUMBERS.length;
+
+        // --- DOM ELEMENTS ---
+        const wheelElement = document.getElementById('wheel');
+        const spinButtonElement = document.getElementById('spinButtonElement');
+        const messageElement = document.getElementById('message');
+        const balanceAmountElement = document.getElementById('balanceAmount');
+        const betTypeElement = document.getElementById('betType');
+        const specificNumberElement = document.getElementById('specificNumber');
+        const betAmountElement = document.getElementById('betAmount');
+        const addBetButtonElement = document.getElementById('addBetButton');
+        const clearBetsButtonElement = document.getElementById('clearBetsButton');
+        const currentBetsListElement = document.getElementById('currentBetsList');
+        const specificNumberBetOption = document.getElementById('specificNumberBetOption');
+
+        // --- GAME STATE ---
+        let currentBalance = 1000;
+        let isSpinning = false;
+        let currentRotation = 0;
+        let currentBets = [];
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeWheel();
+            updateBalanceDisplay();
+            updateBetTypeOptions();
+            betTypeElement.addEventListener('change', updateBetTypeOptions);
+            addBetButtonElement.addEventListener('click', handleAddBet);
+            clearBetsButtonElement.addEventListener('click', handleClearBets);
+            spinButtonElement.addEventListener('click', handleSpin);
+        });
+
+        function initializeWheel() {
+            wheelElement.innerHTML = ''; // Clear previous elements
+            let gradientString = 'conic-gradient(';
+            let currentAngleGrad = 0;
+            ROULETTE_NUMBERS.forEach((num, i) => {
+                const color = NUMBER_COLORS[num];
+                let cssColor;
+                if (color === 'red') cssColor = '#c53030'; // Tailwind red-600
+                else if (color === 'black') cssColor = '#1A202C'; // Darker black for contrast with white text
+                else cssColor = '#38a169'; // Tailwind green-600
+
+                gradientString += `${cssColor} ${currentAngleGrad}deg ${currentAngleGrad + SEGMENT_ANGLE}deg`;
+                if (i < ROULETTE_NUMBERS.length - 1) {
+                    gradientString += ', ';
+                }
+                currentAngleGrad += SEGMENT_ANGLE;
+            });
+            gradientString += ')';
+            wheelElement.style.background = gradientString;
+
+            // Add numbers on top of the conic gradient
+            const wheelWidth = 450; // wheel.offsetWidth might not be ready here
+            const wheelHeight = 450; // wheel.offsetHeight
+            const radius = wheelWidth * 0.43; // Adjusted radius (e.g., 43% of wheel width)
+
+            ROULETTE_NUMBERS.forEach((number, index) => {
+                const numberDiv = document.createElement('div');
+                numberDiv.textContent = number;
+
+                // Calculate the angle for the center of the segment
+                // This angle is for positioning (0 degrees is at the top, positive clockwise)
+                const angle = (SEGMENT_ANGLE * index) + (SEGMENT_ANGLE / 2);
+
+                // Convert this angle to radians and adjust for Math.cos/sin (0 rad at 3 o'clock)
+                const angleRad = (angle - 90) * Math.PI / 180;
+
+                const x = Math.cos(angleRad) * radius + (wheelWidth / 2);
+                const y = Math.sin(angleRad) * radius + (wheelHeight / 2);
+
+                numberDiv.style.position = 'absolute';
+                numberDiv.style.left = `${x}px`;
+                numberDiv.style.top = `${y}px`;
+
+                // Apply transform to center the div on (x,y) and set desired text orientation
+                // CHANGED: Numbers will be upright (not rotated with the segment angle)
+                numberDiv.style.transform = `translate(-50%, -50%) rotate(0deg)`;
+                // Alternative: Radial text (tops pointing outwards)
+                // numberDiv.style.transform = `translate(-50%, -50%) rotate(${angle - 90}deg)`;
+
+                numberDiv.style.fontSize = '14px';
+                numberDiv.style.fontWeight = 'bold';
+                // Ensure text is centered within its div if it has any intrinsic padding/margin issues
+                numberDiv.style.display = 'flex';
+                numberDiv.style.alignItems = 'center';
+                numberDiv.style.justifyContent = 'center';
+                numberDiv.style.textAlign = 'center';
+
+
+                // Set text color for visibility
+                const segmentColorName = NUMBER_COLORS[number];
+                if (segmentColorName === 'black' && number !== 0) {
+                    numberDiv.style.color = '#E2E8F0'; // Light gray for black segments
+                } else if (segmentColorName === 'green') {
+                    numberDiv.style.color = 'white';
+                } else { // Red segments
+                    numberDiv.style.color = 'white';
+                }
+                numberDiv.style.textShadow = '1px 1px 2px rgba(0,0,0,0.7)';
+
+                wheelElement.appendChild(numberDiv);
+            });
+        }
+
+
+        function updateBetTypeOptions() {
+            if (betTypeElement.value === 'number') {
+                specificNumberBetOption.style.display = 'flex';
+            } else {
+                specificNumberBetOption.style.display = 'none';
+            }
+        }
+
+        function handleAddBet() {
+            if (isSpinning) {
+                displayMessage("Cannot add bets while wheel is spinning.", "info");
+                return;
+            }
+            const type = betTypeElement.value;
+            const amount = parseInt(betAmountElement.value);
+            let value = null;
+            let description = "";
+
+            if (isNaN(amount) || amount <= 0) {
+                displayMessage("Please enter a valid bet amount.", "loss");
+                return;
+            }
+            if (amount > currentBalance) {
+                displayMessage("Insufficient balance for this bet.", "loss");
+                return;
+            }
+
+            if (type === 'number') {
+                value = parseInt(specificNumberElement.value);
+                if (isNaN(value) || value < 0 || value > 36) {
+                    displayMessage("Please enter a valid number (0-36).", "loss");
+                    return;
+                }
+                description = `Number ${value}`;
+            } else {
+                description = betTypeElement.options[betTypeElement.selectedIndex].text;
+            }
+
+            currentBalance -= amount;
+            updateBalanceDisplay();
+            currentBets.push({ type, value, amount, description });
+            updateCurrentBetsDisplay();
+            displayMessage(`Bet placed: ${description} for $${amount}`, "info");
+        }
+
+        function handleClearBets() {
+            if (isSpinning) {
+                displayMessage("Cannot clear bets while wheel is spinning.", "info");
+                return;
+            }
+            currentBets.forEach(bet => {
+                currentBalance += bet.amount;
+            });
+            currentBets = [];
+            updateBalanceDisplay();
+            updateCurrentBetsDisplay();
+            displayMessage("All bets cleared.", "info");
+        }
+
+        function updateCurrentBetsDisplay() {
+            currentBetsListElement.innerHTML = '';
+            if (currentBets.length === 0) {
+                const li = document.createElement('li');
+                li.textContent = "No bets placed for this spin.";
+                li.style.textAlign = 'center';
+                li.style.fontStyle = 'italic';
+                currentBetsListElement.appendChild(li);
+            } else {
+                currentBets.forEach(bet => {
+                    const li = document.createElement('li');
+                    li.textContent = `${bet.description} - $${bet.amount}`;
+                    currentBetsListElement.appendChild(li);
+                });
+            }
+        }
+
+        function handleSpin() {
+            if (isSpinning) return;
+            if (currentBets.length === 0) {
+                displayMessage("Please place at least one bet before spinning.", "info");
+                return;
+            }
+
+            isSpinning = true;
+            spinButtonElement.disabled = true;
+            addBetButtonElement.disabled = true;
+            clearBetsButtonElement.disabled = true;
+            displayMessage("Spinning...", "info", false);
+
+            const minRotations = 5;
+            const randomExtraRotationDeg = Math.random() * 360; // Extra bit of spin for randomness
+
+            const winningNumberIndex = Math.floor(Math.random() * ROULETTE_NUMBERS.length);
+            const winningNumber = ROULETTE_NUMBERS[winningNumberIndex];
+
+            // Calculate the angle for the center of the winning segment to be at the top (under the pointer)
+            // The pointer is at 0 degrees (top).
+            // ROULETTE_NUMBERS[0] segment's center is at SEGMENT_ANGLE / 2.
+            // ROULETTE_NUMBERS[winningNumberIndex] segment's center is at (winningNumberIndex * SEGMENT_ANGLE) + (SEGMENT_ANGLE / 2).
+            // To bring this segment's center to the top (0deg), the wheel must rotate by the negative of this angle.
+            const targetAngleForWinningSegmentCenter = -((winningNumberIndex * SEGMENT_ANGLE) + (SEGMENT_ANGLE / 2));
+
+            // Add multiple full rotations plus the random extra bit, then align to the target segment.
+            // currentRotation accumulates. The new target ensures it keeps spinning forward.
+            const fullSpins = (Math.floor(currentRotation / 360) + minRotations) * 360;
+            currentRotation = fullSpins + randomExtraRotationDeg + targetAngleForWinningSegmentCenter;
+
+            wheelElement.style.transition = `transform 7s cubic-bezier(0.33, 1, 0.68, 1)`;
+            wheelElement.style.transform = `rotate(${currentRotation}deg)`;
+
+            setTimeout(() => {
+                isSpinning = false;
+                resolveBets(winningNumber);
+                spinButtonElement.disabled = false;
+                addBetButtonElement.disabled = false;
+                clearBetsButtonElement.disabled = false;
+            }, 7000);
+        }
+
+        function resolveBets(winningNumber) {
+            const winningColor = NUMBER_COLORS[winningNumber];
+            const isEven = winningNumber !== 0 && winningNumber % 2 === 0;
+            const isOdd = winningNumber % 2 !== 0;
+            const isLow = winningNumber >= 1 && winningNumber <= 18;
+            const isHigh = winningNumber >= 19 && winningNumber <= 36;
+            const dozen = winningNumber === 0 ? null : Math.ceil(winningNumber / 12);
+            const column = winningNumber === 0 ? null : ((winningNumber -1) % 3) + 1;
+
+            let totalPayoutThisSpin = 0; // This will be stake + profit for winning bets
+            let totalOriginalBetAmount = 0;
+            let resultsHtml = `Landed on: <strong style="color:${winningColor === 'red' ? '#fc8181' : (winningColor === 'black' ? '#CBD5E0' : '#68D391')}">${winningNumber} (${winningColor})</strong>.<br/>`;
+
+            currentBets.forEach(bet => {
+                totalOriginalBetAmount += bet.amount;
+                let won = false;
+                let payoutMultiplier = 0; // Profit multiplier (e.g., 35 for number, so total return is stake + stake*35)
+
+                switch (bet.type) {
+                    case 'number': if (bet.value === winningNumber) { won = true; payoutMultiplier = 35; } break;
+                    case 'red': if (winningColor === 'red') { won = true; payoutMultiplier = 1; } break;
+                    case 'black': if (winningColor === 'black') { won = true; payoutMultiplier = 1; } break;
+                    case 'even': if (isEven) { won = true; payoutMultiplier = 1; } break;
+                    case 'odd': if (isOdd) { won = true; payoutMultiplier = 1; } break;
+                    case 'low': if (isLow) { won = true; payoutMultiplier = 1; } break;
+                    case 'high': if (isHigh) { won = true; payoutMultiplier = 1; } break;
+                    case 'dozen1': if (dozen === 1) { won = true; payoutMultiplier = 2; } break;
+                    case 'dozen2': if (dozen === 2) { won = true; payoutMultiplier = 2; } break;
+                    case 'dozen3': if (dozen === 3) { won = true; payoutMultiplier = 2; } break;
+                    case 'col1': if (column === 1) { won = true; payoutMultiplier = 2; } break;
+                    case 'col2': if (column === 2) { won = true; payoutMultiplier = 2; } break;
+                    case 'col3': if (column === 3) { won = true; payoutMultiplier = 2; } break;
+                }
+
+                if (won) {
+                    const profit = bet.amount * payoutMultiplier;
+                    const amountReturned = bet.amount + profit; // stake back + profit
+                    currentBalance += amountReturned; // Balance was reduced by bet.amount when placed. Add back stake + profit.
+                    totalPayoutThisSpin += amountReturned;
+                    resultsHtml += `Bet on ${bet.description} ($${bet.amount}) - <strong style="color:#68D391;">WON $${amountReturned.toFixed(2)}!</strong><br/>`;
+                } else {
+                    resultsHtml += `Bet on ${bet.description} ($${bet.amount}) - <strong style="color:#fc8181;">Lost.</strong><br/>`;
+                }
+            });
+
+            updateBalanceDisplay();
+
+            let netChange = totalPayoutThisSpin - totalOriginalBetAmount; // How much player's balance changed this round
+
+            if (netChange > 0) {
+                displayMessage(`${resultsHtml}Net gain this spin: <strong style="color:#68D391;">$${netChange.toFixed(2)}</strong>`, "win", false);
+            } else if (netChange < 0) {
+                displayMessage(`${resultsHtml}Net loss this spin: <strong style="color:#fc8181;">$${Math.abs(netChange).toFixed(2)}</strong>`, "loss", false);
+            } else { // Broke even or no bets were winning/losing (e.g. only one bet placed, it lost, netChange = -bet.amount)
+                 if (currentBets.length > 0) { // if bets were placed
+                    displayMessage(`${resultsHtml}Broke even this spin (or all bets lost resulting in overall loss).`, "info", false);
+                 } else {
+                    displayMessage(resultsHtml, "info", false); // Just show landed on
+                 }
+            }
+            
+            currentBets = [];
+            updateCurrentBetsDisplay();
+
+
+            if (currentBalance <= 0 && totalOriginalBetAmount > 0) { // Check totalOriginalBetAmount to ensure they actually played
+                displayMessage("Game Over! You've run out of money. Refresh to play again.", "loss", false);
+                spinButtonElement.disabled = true;
+                addBetButtonElement.disabled = true;
+                clearBetsButtonElement.disabled = true;
+            }
+        }
+
+        function updateBalanceDisplay() {
+            balanceAmountElement.textContent = currentBalance.toFixed(2);
+        }
+
+        function displayMessage(msg, type = "info", autoClear = true) {
+            messageElement.innerHTML = `<span class="${type}">${msg}</span>`;
+            messageElement.className = `message-display ${type}`;
+
+            if (autoClear) {
+                setTimeout(() => {
+                    if (messageElement.innerHTML.includes(msg)) {
+                         messageElement.innerHTML = '<span>Place your bets!</span>';
+                         messageElement.className = 'message-display info';
+                    }
+                }, 7000); // Increased autoClear time
+            }
+        }
+    </script>
+</body>
+</html>

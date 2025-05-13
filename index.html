@@ -2,10 +2,139 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=./public/view/index.html">
-    <title>Redirecting...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Deposit Hub - Gamble Securely</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="forside.css"> <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'roboto-mono': ['Roboto Mono', 'monospace'],
+                    },
+                    colors: {
+                        'brand-primary': '#1A1A2E', // Deep dark blue
+                        'brand-secondary': '#162447', // Slightly lighter dark blue
+                        'brand-accent': '#E94560', // Vibrant accent (e.g., pink/red)
+                        'brand-light': '#F0F0F0',   // Light text/elements
+                        'brand-subtle': '#A0A0A0',  // Subtle text/borders
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'pulse-glow': 'pulseGlow 2s infinite ease-in-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: 0 },
+                            '100%': { opacity: 1 },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: 0 },
+                            '100%': { transform: 'translateY(0)', opacity: 1 },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 5px #E94560', transform: 'scale(1)' },
+                            '50%': { boxShadow: '0 0 20px #E94560', transform: 'scale(1.02)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <p>If you are not redirected automatically, follow this <a href="./public/view/index.html">link</a>.</p>
-</body>
+<body class="bg-brand-primary text-brand-light font-inter antialiased">
+
+    <header class="bg-brand-secondary shadow-xl sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-brand-accent tracking-tight">
+                Crypto<span class="text-brand-light">Gambit</span>
+            </a>
+            <div class="space-x-6">
+                <a href="#" class="text-brand-light hover:text-brand-accent transition-colors duration-300 text-lg font-medium current-page-nav">Deposit</a>
+                <a href="/roulette" class="text-brand-light hover:text-brand-accent transition-colors duration-300 text-lg font-medium">Roulette</a>
+                <a href="/blackjack" class="text-brand-light hover:text-brand-accent transition-colors duration-300 text-lg font-medium">Blackjack</a>
+                <a href="#" class="text-brand-light hover:text-brand-accent transition-colors duration-300 text-lg font-medium">FAQ</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section class="text-center mb-16 animate-fade-in">
+            <h1 class="text-5xl font-extrabold mb-4">
+                Deposit Crypto & Try Your Luck
+            </h1>
+            <p class="text-xl text-brand-subtle mb-8 max-w-2xl mx-auto">
+                Choose your preferred cryptocurrency to make a deposit. Please remember, all deposits are donations and nothing on this site is real. <strong class="text-brand-accent">(No Returns)</strong>
+            </p>
+        </section>
+
+        <section class="animate-slide-up" style="animation-delay: 0.2s;">
+            <h2 class="text-3xl font-semibold mb-8 text-center">Select Cryptocurrency</h2>
+            <div id="crypto-options-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                </div>
+        </section>
+
+        <section class="mt-20 text-center animate-fade-in" style="animation-delay: 0.4s;">
+            <h3 class="text-2xl font-semibold mb-6">Ready to Play?</h3>
+            <p class="text-brand-subtle mb-6">Once your deposit is confirmed (simulated), head over to our games!</p>
+            <div class="space-x-4">
+                <a href="/roulette" class="bg-brand-accent hover:bg-opacity-80 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">
+                    Go to Roulette
+                </a>
+                <a href="/blackjack" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">
+                    Play Blackjack
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-brand-secondary mt-20 py-10 text-center border-t border-gray-700">
+        <p class="text-brand-subtle">&copy; <span id="currentYear"></span> Tobias. All rights reserved.</p>
+        <p class="text-xs text-gray-600 mt-2">Disclaimer: Gambling involves risk. Please play responsibly. This is a fictional platform.</p>
+        <div class="mt-4 space-x-4">
+            <a href="#" class="text-gray-500 hover:text-brand-accent"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="#" class="text-gray-500 hover:text-brand-accent"><i class="fab fa-telegram fa-lg"></i></a>
+            <a href="#" class="text-gray-500 hover:text-brand-accent"><i class="fab fa-discord fa-lg"></i></a>
+        </div>
+    </footer>
+
+    <div id="crypto-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-[100] hidden animate-fade-in">
+        <div class="bg-brand-secondary p-8 rounded-xl shadow-2xl w-full max-w-md transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-3xl font-semibold" id="modal-crypto-name"></h3>
+                <button id="close-modal-button" class="text-brand-subtle hover:text-brand-light text-2xl">&times;</button>
+            </div>
+            <div class="text-center mb-6">
+                <img id="modal-qr-code" src="" alt="QR Code" class="w-48 h-48 mx-auto mb-4 rounded-lg border-4 border-brand-accent p-1">
+                <p class="text-sm text-brand-subtle">Scan the QR code or copy the address below.</p>
+            </div>
+            <div class="mb-6">
+                <label for="modal-crypto-address" class="block text-sm font-medium text-brand-subtle mb-1">Deposit Address:</label>
+                <div class="flex items-center bg-gray-700 p-3 rounded-lg">
+                    <input type="text" id="modal-crypto-address" readonly class="flex-grow bg-transparent text-brand-light font-roboto-mono text-sm outline-none">
+                    <button id="copy-address-button" class="ml-3 text-brand-accent hover:text-opacity-80 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-accent" title="Copy Address">
+                        <i class="fas fa-copy fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+            <p class="text-xs text-center text-yellow-400 bg-yellow-900 bg-opacity-50 p-3 rounded-md">
+                <i class="fas fa-exclamation-triangle mr-2"></i>Only send <span id="modal-asset-symbol" class="font-bold"></span> to this address. Sending any other asset may result in permanent loss.
+            </p>
+            <button id="modal-confirm-button" class="mt-8 w-full bg-brand-accent hover:bg-opacity-80 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all duration-300 transform hover:scale-102">
+                I've Made The Deposit (Simulated)
+            </button>
+        </div>
+    </div>
+
+    <div id="toast-notification" class="fixed bottom-5 right-5 bg-green-500 text-white py-3 px-6 rounded-lg shadow-xl text-lg opacity-0 transform translate-y-10 transition-all duration-500 ease-out z-[200]">
+        <i class="fas fa-check-circle mr-2"></i><span id="toast-message"></span>
+    </div>
+
+    <script src="forside.js"></script> </body>
 </html>

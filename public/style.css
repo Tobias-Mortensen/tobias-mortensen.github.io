@@ -1,0 +1,392 @@
+/* style.css */
+:root {
+    --table-green: #006400; /* Dark green for the table */
+    --felt-green: #004d00;  /* Slightly darker green for felt effect */
+    --gold-accent: #ffd700;
+    --card-bg: #ffffff;
+    --card-border: #333333;
+    --text-light: #f0f0f0;
+    --text-dark: #212121;
+    --button-primary: #c8a2c8; /* Lilac */
+    --button-primary-hover: #b082b0;
+    --button-secondary: #778899; /* Light Slate Gray */
+    --button-secondary-hover: #5a6878;
+    --button-special: #ff8c00; /* Dark Orange */
+    --button-special-hover: #cc7000;
+    --chip-color-10: #d9534f; /* Red */
+    --chip-color-25: #5cb85c; /* Green */
+    --chip-color-50: #428bca; /* Blue */
+    --chip-color-100: #333333; /* Black */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    /* A more subtle, less plain background */
+    background-color: #333; /* Fallback */
+    background-image: radial-gradient(circle, #4a5a4a 0%, #2a3a2a 100%);
+    color: var(--text-light);
+    margin: 0;
+    padding: 20px; /* Add some padding around the game container */
+    display: flex; /* Helps center game-container if its width is constrained */
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.game-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 25px; /* Space between table and dealer image */
+    width: 100%;
+    max-width: 1300px; /* Adjust as needed to accommodate dealer image */
+    margin: 0 auto;
+}
+
+.game-table {
+    background: radial-gradient(ellipse at center, var(--felt-green) 0%, var(--table-green) 70%);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0,0,0,0.3);
+    width: 100%; /* Take available width within its flex item constraints */
+    max-width: 900px;
+    text-align: center;
+    flex-grow: 1; /* Allows game table to take up space */
+    position: relative; /* For absolute positioning of back link if needed */
+}
+
+.back-link {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    color: var(--gold-accent);
+    text-decoration: none;
+    font-size: 0.9em;
+    padding: 5px 10px;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.back-link:hover {
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.game-header h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-accent);
+    font-size: 2.8em;
+    margin-top: 30px; /* Make space for back link */
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+.player-info {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    background: rgba(0,0,0,0.2);
+    padding: 8px;
+    border-radius: 8px;
+}
+.player-info span {
+    margin: 0 10px;
+}
+
+.dealer-area, .player-area {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 10px;
+    min-height: 150px;
+}
+
+.dealer-area h2, .player-area h2 {
+    font-size: 1.4em;
+    color: var(--gold-accent);
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.hand {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100px;
+    gap: 8px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.card {
+    background-color: var(--card-bg);
+    color: var(--text-dark);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    width: 70px;
+    height: 100px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.8em;
+    font-weight: bold;
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+}
+
+.card.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.card.hidden {
+    background-image: repeating-linear-gradient(
+        45deg,
+        #555,
+        #555 10px,
+        #666 10px,
+        #666 20px
+    );
+    color: transparent !important; /* Ensure text is hidden */
+    /* Remove any direct text content if JS didn't clear it */
+}
+.card.hidden .rank, .card.hidden .suit {
+    display: none !important;
+}
+.card.hidden::before, .card.hidden::after {
+    content: '' !important; /* Important to override default content */
+    display: none !important;
+}
+
+
+.card .rank {
+    font-size: 1em;
+}
+.card .suit {
+    font-size: 0.8em;
+}
+
+.card.hearts .suit, .card.diamonds .suit { color: #ff0000; }
+.card.clubs .suit, .card.spades .suit { color: #000000; }
+
+.card::before, .card::after {
+    position: absolute;
+    font-size: 0.5em;
+}
+.card::before {
+    content: attr(data-rank) " " attr(data-suit-char);
+    top: 5px;
+    left: 5px;
+}
+.card::after {
+    content: attr(data-rank) " " attr(data-suit-char);
+    bottom: 5px;
+    right: 5px;
+    transform: rotate(180deg);
+}
+.card.hearts::before, .card.hearts::after { color: #ff0000; }
+.card.diamonds::before, .card.diamonds::after { color: #ff0000; }
+.card.clubs::before, .card.clubs::after { color: #000000; }
+.card.spades::before, .card.spades::after { color: #000000; }
+
+
+.message-board {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    min-height: 30px;
+    overflow: hidden; /* Contain transforms */
+}
+#game-message {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    color: var(--gold-accent);
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    display: inline-block; /* For transform to work correctly */
+}
+
+.controls-area {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 10px;
+}
+
+#betting-controls, #game-actions, #post-round-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.action-button, .chip {
+    padding: 12px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    color: white;
+}
+.action-button:hover, .chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+.action-button:active, .chip:active {
+    transform: translateY(0px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.action-button { background-color: var(--button-primary); }
+.action-button:hover { background-color: var(--button-primary-hover); }
+
+.action-button.secondary { background-color: var(--button-secondary); }
+.action-button.secondary:hover { background-color: var(--button-secondary-hover); }
+
+.action-button.special { background-color: var(--button-special); }
+.action-button.special:hover { background-color: var(--button-special-hover); }
+
+.action-button:disabled, .chip:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+#bet-amount-input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    width: 120px;
+    text-align: center;
+    background-color: #f0f0f0;
+    color: var(--text-dark);
+}
+
+.chip-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+.chip {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9em;
+}
+.chip[data-value="10"] { background-color: var(--chip-color-10); }
+.chip[data-value="25"] { background-color: var(--chip-color-25); }
+.chip[data-value="50"] { background-color: var(--chip-color-50); }
+.chip[data-value="100"] { background-color: var(--chip-color-100); color: white;}
+
+
+.rules-info {
+    margin-top: 25px;
+    font-size: 0.9em;
+    color: rgba(240, 240, 240, 0.8);
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 0.8em;
+    color: rgba(240, 240, 240, 0.6);
+}
+
+/* Animation for messages */
+.message-enter {
+    opacity: 0;
+    transform: translateY(-15px);
+}
+.message-exit {
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+/* Dealer Image Area Styles */
+.dealer-image-area {
+    width: 280px; /* Adjust width as you like */
+    flex-shrink: 0; /* Prevent this column from shrinking */
+    padding-top: 60px; /* Align somewhat with the game table content */
+    text-align: center;
+}
+
+#dealer-image {
+    width: 100%;
+    max-width: 250px; /* Control max size of image */
+    height: auto;
+    border-radius: 15px;
+    border: 4px solid var(--gold-accent);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    background-color: #222; /* Placeholder background if image fails to load */
+}
+.dealer-image-caption {
+    color: var(--gold-accent);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3em;
+    margin-top: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 1200px) { /* Breakpoint when dealer image might stack */
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .dealer-image-area {
+        width: 90%;
+        max-width: 300px;
+        padding-top: 20px;
+        order: -1; /* Moves dealer image above game table on smaller screens */
+        margin-bottom: 20px;
+    }
+    .game-table {
+        max-width: 100%; /* Allow table to use more width when stacked */
+    }
+}
+
+@media (max-width: 768px) {
+    .game-header h1 { font-size: 2.2em; }
+    .player-info { font-size: 1em; }
+    .card { width: 60px; height: 90px; font-size: 1.6em; }
+    .card::before, .card::after { font-size: 0.4em; }
+    .action-button, .chip { padding: 10px 15px; font-size: 0.9em; }
+    .chip { width: 50px; height: 50px; }
+    #betting-controls, #game-actions { flex-direction: column; align-items: stretch; }
+    #betting-controls > *, #game-actions > * { width: 100%; margin-bottom: 8px; }
+    .chip-container { justify-content: space-around; width: 100%; }
+    #bet-amount-input { width: calc(100% - 24px); }
+}
+
+@media (max-width: 480px) {
+    body { padding: 10px; }
+    .game-table { padding: 10px; }
+    .game-header h1 { font-size: 1.8em; }
+    .player-info { flex-direction: column; gap: 5px; }
+    .card { width: 50px; height: 75px; font-size: 1.3em; }
+    .card::before, .card::after { display: none; }
+    .card .rank { font-size: 0.8em; }
+    .card .suit { font-size: 0.7em; }
+    .action-button, .chip { padding: 8px 12px; font-size: 0.8em; }
+    .chip { width: 40px; height: 40px; font-size: 0.7em;}
+    .back-link { top: 8px; left: 8px; font-size: 0.8em;}
+    .game-header h1 { margin-top: 40px;}
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Blackjack Royale</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-table">
+            <a href="/" class="back-link">Return to Lobby</a>
+            <header class="game-header">
+                <h1>Blackjack Royale</h1>
+                <div class="player-info">
+                    <span>Bank: $</span><span id="player-bank">1000</span>
+                    <span>Current Bet: $</span><span id="current-bet-display">0</span>
+                </div>
+            </header>
+
+            <div class="dealer-area">
+                <h2>Dealer's Hand (<span id="dealer-score">0</span>)</h2>
+                <div id="dealer-hand" class="hand">
+                    </div>
+            </div>
+
+            <div class="player-area">
+                <h2>Your Hand (<span id="player-score">0</span>)</h2>
+                <div id="player-hand" class="hand">
+                    </div>
+            </div>
+
+            <div class="message-board">
+                <p id="game-message">Place your bet to start the game!</p>
+            </div>
+
+            <div class="controls-area">
+                <div id="betting-controls">
+                    <div class="chip-container">
+                        <button class="chip" data-value="10">$10</button>
+                        <button class="chip" data-value="25">$25</button>
+                        <button class="chip" data-value="50">$50</button>
+                        <button class="chip" data-value="100">$100</button>
+                    </div>
+                    <input type="number" id="bet-amount-input" placeholder="Bet Amount" min="1">
+                    <button id="deal-button" class="action-button">Deal</button>
+                    <button id="clear-bet-button" class="action-button secondary">Clear Bet</button>
+                </div>
+
+                <div id="game-actions" style="display: none;">
+                    <button id="hit-button" class="action-button">Hit</button>
+                    <button id="stand-button" class="action-button">Stand</button>
+                    <button id="double-down-button" class="action-button special">Double Down</button>
+                    <button id="split-button" class="action-button special" disabled>Split</button>
+                </div>
+
+                <div id="post-round-controls" style="display: none;">
+                    <button id="new-round-button" class="action-button">Next Round</button>
+                </div>
+            </div>
+
+            <div class="rules-info">
+                <p>Dealer must stand on 17 and must draw to 16. Blackjack pays 3:2.</p>
+            </div>
+
+            <footer>
+                <p>Enjoy the game! Remember to play responsibly.</p>
+            </footer>
+        </div>
+
+        <div class="dealer-image-area">
+            <img id="dealer-image" src="/coins/your-dealer-image-url.png" alt="Dealer Image Placeholder">
+             <p class="dealer-image-caption">Your Dealer</p> </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
