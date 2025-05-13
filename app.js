@@ -15,6 +15,10 @@ app.get('/roulette', (req, res) => {
   // changed to send the correct file path
   res.sendFile(path.join(__dirname,'roulette.html'));
 });
+app.get('/faq', (req, res) => {
+  // changed to send the correct file path
+  res.sendFile(path.join(__dirname, 'faq.html'));
+});
 
 app.get('/blackjack', (req, res) => {
   // changed to send the correct file path
