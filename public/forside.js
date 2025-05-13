@@ -46,7 +46,7 @@ const cryptocurrencies = [
         name: 'Litecoin',
         symbol: 'LTC',
         image: '/public/coins/ltc.png',
-        qrCode: '/public/coins/qr_ltc.png', // Added prefix
+        qrCode: './public/coins/qr_ltc.png', // Added prefix
         address: 'LS7Lk7eVdbu5yimKnaExDxbCvFKVXtyXpp',
         description: 'A peer-to-peer cryptocurrency, an early Bitcoin alternative.'
     },
@@ -54,7 +54,7 @@ const cryptocurrencies = [
         name: 'Solana',
         symbol: 'SOL',
         image: '/public/coins/sol.png',
-        qrCode: '/tobias-mortensen.github.io/coins/qr_sol.png', // Added prefix
+        qrCode: '/public/coins/qr_sol.png', // Added prefix
         address: 'D2ZDobK1tZEJSBTVsGuCXWHavKQv1Scx6HHW9pLRmS9s',
         description: 'A high-performance blockchain supporting scalable dApps.'
     },
