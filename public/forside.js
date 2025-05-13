@@ -30,24 +30,24 @@ const cryptocurrencies = [
         name: 'Bitcoin',
         symbol: 'BTC',
         image: '/public/coins/btc.png',
-        qrCode: '/tobias-mortensen.github.io/coins/qr_btc.png', // Added prefix
-        address: 'bc1qquuw8yu3ft57zgssef7kysm0wayyzgllndf5hv',
+        qrCode: '/public/coins/btcqr.png', // Added prefix
+        address: 'bc1qm4q9dsjuggm8jc7ltuwqkfxpwpqnuudtt885dg',
         description: 'The original cryptocurrency, known for its security and decentralization.'
     },
     {
         name: 'Dogecoin',
         symbol: 'DOGE',
         image: '/public/coins/dodge.png',
-        qrCode: '/tobias-mortensen.github.io/coins/qr_dodge.png', // Added prefix
-        address: 'DFWVzGMfg6Kx1dWTc6WuPm6Fq38shjXkgm',
+        qrCode: '/public/coins/dogeqr.png', // Added prefix
+        address: 'DSdVDxkRCVV5hWodA2fn4hZf5xgpkJ876m',
         description: 'A fun and friendly internet currency, started as a meme.'
     },
     {
         name: 'Litecoin',
         symbol: 'LTC',
         image: '/public/coins/ltc.png',
-        qrCode: '/tobias-mortensen.github.io/coins/qr_ltc.png', // Added prefix
-        address: 'LNpJWUBmjZM54AsMNKWFY73pUmfEXPznNP',
+        qrCode: '/public/coins/qr_ltc.png', // Added prefix
+        address: 'LS7Lk7eVdbu5yimKnaExDxbCvFKVXtyXpp',
         description: 'A peer-to-peer cryptocurrency, an early Bitcoin alternative.'
     },
     {
@@ -55,39 +55,39 @@ const cryptocurrencies = [
         symbol: 'SOL',
         image: '/public/coins/sol.png',
         qrCode: '/tobias-mortensen.github.io/coins/qr_sol.png', // Added prefix
-        address: 'FCYnoCNRAnXLLsEriFGL3kBn21T1ZgZPgNNYHLZSZiYE',
+        address: 'D2ZDobK1tZEJSBTVsGuCXWHavKQv1Scx6HHW9pLRmS9s',
         description: 'A high-performance blockchain supporting scalable dApps.'
     },
     {
         name: 'Tether',
         symbol: 'USDT',
         image: '/public/coins/tether.png',
-        qrCode: '/tobias-mortensen.github.io/coins/qr_usdt.png', // Added prefix
-        address: '0x61B04b538bd155ee993b1B361Ad388B8d1D2c9b1',
+        qrCode: '/public/coins/qr_usdt.png', // Added prefix
+        address: '0x8288f6C529a70Cc6cAD5De9c8fF6FC031c6C8313',
         description: 'A stablecoin pegged to the US Dollar, widely used for trading.'
     },
     {
         name: 'XRP',
         symbol: 'XRP',
         image: '/public/coins/xrp.png',
-        qrCode: '/tobias-mortensen.github.io/coins/qr_xrp.png', // Added prefix
-        address: 'raMVN52QQsGspsYxULJL7rkkvfV1jrUi4W',
+        qrCode: '/public/coins/qr_xrp.png', // Added prefix
+        address: 'rBkLY5LKmu7MpunY3WHB77q2ard3Vn4L6c',
         description: 'A digital payment protocol often used by financial institutions.'
     },
     {
         name: 'Ethereum',
         symbol: 'ETH',
         image: '/public/coins/eth.png',
-        qrCode: '/tobias-mortensen.github.io/coins/qr_eth.png', // Added prefix
-        address: '0x61B04b538bd155ee993b1B361Ad388B8d1D2c9b1', // Example address
+        qrCode: '/public/coins/qr_eth.png', // Added prefix
+        address: '0x8288f6C529a70Cc6cAD5De9c8fF6FC031c6C8313', // Example address
         description: 'A platform for decentralized applications and smart contracts.'
     },
     {
         name: 'Cardano',
         symbol: 'ADA',
         image: '/public/coins/ada.png',
-        qrCode: '/tobias-mortensen.github.io/coins/qr_ada.png', // Added prefix
-        address: 'addr1qy04j43wcsnh60n96q6tch32lh8xxt4t5qa5ncdrycekw5slt9tza3p805lxt5p5h30z4lwwvvh2hgpmf8s6xf3nvafqdn5f53', // Example address
+        qrCode: '/public/coins/qr_ada.png', // Added prefix
+        address: 'addr1q82a6888t53dv4k767frwy0th30pcsjagglyuz9cwez4ktx4m5wwwhfz6etda4ujxug7h0z7r3p96s37fcytsaj9tvkqhd0wq2', // Example address
         description: 'A proof-of-stake blockchain platform, focusing on sustainability.'
     }
 ];
