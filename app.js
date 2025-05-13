@@ -16,9 +16,9 @@ app.get('/roulette', (req, res) => {
   res.sendFile(path.join(__dirname, 'public','game.html'));
 });
 
-app.get('/bj/blackjack', (req, res) => {
+app.get('/blackjack', (req, res) => {
   // changed to send the correct file path
-  res.sendFile(path.join(__dirname, 'bj.html'));
+  res.sendFile(path.join(__dirname, 'bj','bj.html'));
 });
 app.use('/coins', express.static(path.join(__dirname, 'coins')));
 
