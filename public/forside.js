@@ -27,68 +27,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const cryptocurrencies = [
     {
-        name: 'Bitcoin', // Original alt: "Image"
+        name: 'Bitcoin',
         symbol: 'BTC',
-        image: '/tobias-mortensen.github.io/coins/btc.png', // Matches your original path
-        qrCode: '/coins/qr_btc.png', // Placeholder QR path
-        address: 'bc1qquuw8yu3ft57zgssef7kysm0wayyzgllndf5hv', // From your original data-text
+        image: '/tobias-mortensen.github.io/coins/btc.png',
+        qrCode: '/tobias-mortensen.github.io/coins/qr_btc.png', // Added prefix
+        address: 'bc1qquuw8yu3ft57zgssef7kysm0wayyzgllndf5hv',
         description: 'The original cryptocurrency, known for its security and decentralization.'
     },
     {
-        name: 'Dogecoin', // Original alt: "Image 3" (associated with dodge.png)
+        name: 'Dogecoin',
         symbol: 'DOGE',
-        image: '/tobias-mortensen.github.io/coins/dodge.png', // Using your original path "dodge.png"
-        qrCode: '/coins/qr_dodge.png', // Placeholder QR path
-        address: 'DFWVzGMfg6Kx1dWTc6WuPm6Fq38shjXkgm', // From your original data-text
+        image: '/tobias-mortensen.github.io/coins/dodge.png',
+        qrCode: '/tobias-mortensen.github.io/coins/qr_dodge.png', // Added prefix
+        address: 'DFWVzGMfg6Kx1dWTc6WuPm6Fq38shjXkgm',
         description: 'A fun and friendly internet currency, started as a meme.'
     },
     {
-        name: 'Litecoin', // Original alt: "Image 2"
+        name: 'Litecoin',
         symbol: 'LTC',
-        image: '/tobias-mortensen.github.io/coins/ltc.png', // Matches your original path
-        qrCode: '/coins/qr_ltc.png', // Placeholder QR path
-        address: 'LNpJWUBmjZM54AsMNKWFY73pUmfEXPznNP', // From your original data-text
+        image: '/tobias-mortensen.github.io/coins/ltc.png',
+        qrCode: '/tobias-mortensen.github.io/coins/qr_ltc.png', // Added prefix
+        address: 'LNpJWUBmjZM54AsMNKWFY73pUmfEXPznNP',
         description: 'A peer-to-peer cryptocurrency, an early Bitcoin alternative.'
     },
     {
-        name: 'Solana', // Original alt: "Image 4"
+        name: 'Solana',
         symbol: 'SOL',
-        image: '/tobias-mortensen.github.io/coins/sol.png', // Matches your original path
-        qrCode: '/coins/qr_sol.png', // Placeholder QR path
-        address: 'FCYnoCNRAnXLLsEriFGL3kBn21T1ZgZPgNNYHLZSZiYE', // From your original data-text
+        image: '/tobias-mortensen.github.io/coins/sol.png',
+        qrCode: '/tobias-mortensen.github.io/coins/qr_sol.png', // Added prefix
+        address: 'FCYnoCNRAnXLLsEriFGL3kBn21T1ZgZPgNNYHLZSZiYE',
         description: 'A high-performance blockchain supporting scalable dApps.'
     },
     {
-        name: 'Tether', // Original alt: "Image 5"
+        name: 'Tether',
         symbol: 'USDT',
-        image: '/tobias-mortensen.github.io/coins/tether.png', // Matches your original path
-        qrCode: '/coins/qr_usdt.png', // Placeholder QR path
-        address: '0x61B04b538bd155ee993b1B361Ad388B8d1D2c9b1', // From your original data-text
+        image: '/tobias-mortensen.github.io/coins/tether.png',
+        qrCode: '/tobias-mortensen.github.io/coins/qr_usdt.png', // Added prefix
+        address: '0x61B04b538bd155ee993b1B361Ad388B8d1D2c9b1',
         description: 'A stablecoin pegged to the US Dollar, widely used for trading.'
     },
     {
-        name: 'XRP', // Original alt: "Image 6"
+        name: 'XRP',
         symbol: 'XRP',
-        image: '/tobias-mortensen.github.io/coins/xrp.png', // Matches your original path
-        qrCode: '/coins/qr_xrp.png', // Placeholder QR path
-        address: 'raMVN52QQsGspsYxULJL7rkkvfV1jrUi4W', // From your original data-text
+        image: '/tobias-mortensen.github.io/coins/xrp.png',
+        qrCode: '/tobias-mortensen.github.io/coins/qr_xrp.png', // Added prefix
+        address: 'raMVN52QQsGspsYxULJL7rkkvfV1jrUi4W',
         description: 'A digital payment protocol often used by financial institutions.'
     },
-    // You can still include other cryptocurrencies I added, like Ethereum or Cardano,
-    // just ensure their image paths point to actual images you have.
     {
         name: 'Ethereum',
         symbol: 'ETH',
-        image: '/tobias-mortensen.github.io/coins/eth.png', // Ensure you have eth.png and qr_eth.png
-        qrCode: '/coins/qr_eth.png',
+        image: '/tobias-mortensen.github.io/coins/eth.png',
+        qrCode: '/tobias-mortensen.github.io/coins/qr_eth.png', // Added prefix
         address: '0x61B04b538bd155ee993b1B361Ad388B8d1D2c9b1', // Example address
         description: 'A platform for decentralized applications and smart contracts.'
     },
     {
         name: 'Cardano',
         symbol: 'ADA',
-        image: '/tobias-mortensen.github.io/coins/ada.png', // Ensure you have ada.png and qr_ada.png
-        qrCode: '/coins/qr_ada.png',
+        image: '/tobias-mortensen.github.io/coins/ada.png',
+        qrCode: '/tobias-mortensen.github.io/coins/qr_ada.png', // Added prefix
         address: 'addr1qy04j43wcsnh60n96q6tch32lh8xxt4t5qa5ncdrycekw5slt9tza3p805lxt5p5h30z4lwwvvh2hgpmf8s6xf3nvafqdn5f53', // Example address
         description: 'A proof-of-stake blockchain platform, focusing on sustainability.'
     }
