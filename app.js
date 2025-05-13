@@ -16,7 +16,7 @@ app.get('/roulette', (req, res) => {
   res.sendFile(path.join(__dirname, 'game.html'));
 });
 
-app.get('/blackjack', (req, res) => {
+app.get('/bj/blackjack', (req, res) => {
   // changed to send the correct file path
   res.sendFile(path.join(__dirname, "bj", 'bj.html'));
 });
