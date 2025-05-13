@@ -29,7 +29,7 @@ const cryptocurrencies = [
     {
         name: 'Bitcoin',
         symbol: 'BTC',
-        image: '/tobias-mortensen.github.io/coins/btc.png',
+        image: '/public/coins/btc.png',
         qrCode: '/tobias-mortensen.github.io/coins/qr_btc.png', // Added prefix
         address: 'bc1qquuw8yu3ft57zgssef7kysm0wayyzgllndf5hv',
         description: 'The original cryptocurrency, known for its security and decentralization.'
@@ -37,7 +37,7 @@ const cryptocurrencies = [
     {
         name: 'Dogecoin',
         symbol: 'DOGE',
-        image: '/tobias-mortensen.github.io/coins/dodge.png',
+        image: '/public/coins/dodge.png',
         qrCode: '/tobias-mortensen.github.io/coins/qr_dodge.png', // Added prefix
         address: 'DFWVzGMfg6Kx1dWTc6WuPm6Fq38shjXkgm',
         description: 'A fun and friendly internet currency, started as a meme.'
@@ -45,7 +45,7 @@ const cryptocurrencies = [
     {
         name: 'Litecoin',
         symbol: 'LTC',
-        image: '/tobias-mortensen.github.io/coins/ltc.png',
+        image: '/public/coins/ltc.png',
         qrCode: '/tobias-mortensen.github.io/coins/qr_ltc.png', // Added prefix
         address: 'LNpJWUBmjZM54AsMNKWFY73pUmfEXPznNP',
         description: 'A peer-to-peer cryptocurrency, an early Bitcoin alternative.'
@@ -53,7 +53,7 @@ const cryptocurrencies = [
     {
         name: 'Solana',
         symbol: 'SOL',
-        image: '/tobias-mortensen.github.io/coins/sol.png',
+        image: '/public/coins/sol.png',
         qrCode: '/tobias-mortensen.github.io/coins/qr_sol.png', // Added prefix
         address: 'FCYnoCNRAnXLLsEriFGL3kBn21T1ZgZPgNNYHLZSZiYE',
         description: 'A high-performance blockchain supporting scalable dApps.'
@@ -61,7 +61,7 @@ const cryptocurrencies = [
     {
         name: 'Tether',
         symbol: 'USDT',
-        image: '/tobias-mortensen.github.io/coins/tether.png',
+        image: '/public/coins/tether.png',
         qrCode: '/tobias-mortensen.github.io/coins/qr_usdt.png', // Added prefix
         address: '0x61B04b538bd155ee993b1B361Ad388B8d1D2c9b1',
         description: 'A stablecoin pegged to the US Dollar, widely used for trading.'
@@ -69,7 +69,7 @@ const cryptocurrencies = [
     {
         name: 'XRP',
         symbol: 'XRP',
-        image: '/tobias-mortensen.github.io/coins/xrp.png',
+        image: '/public/coins/xrp.png',
         qrCode: '/tobias-mortensen.github.io/coins/qr_xrp.png', // Added prefix
         address: 'raMVN52QQsGspsYxULJL7rkkvfV1jrUi4W',
         description: 'A digital payment protocol often used by financial institutions.'
@@ -77,7 +77,7 @@ const cryptocurrencies = [
     {
         name: 'Ethereum',
         symbol: 'ETH',
-        image: '/tobias-mortensen.github.io/coins/eth.png',
+        image: '/public/coins/eth.png',
         qrCode: '/tobias-mortensen.github.io/coins/qr_eth.png', // Added prefix
         address: '0x61B04b538bd155ee993b1B361Ad388B8d1D2c9b1', // Example address
         description: 'A platform for decentralized applications and smart contracts.'
@@ -85,7 +85,7 @@ const cryptocurrencies = [
     {
         name: 'Cardano',
         symbol: 'ADA',
-        image: '/tobias-mortensen.github.io/coins/ada.png',
+        image: '/public/coins/ada.png',
         qrCode: '/tobias-mortensen.github.io/coins/qr_ada.png', // Added prefix
         address: 'addr1qy04j43wcsnh60n96q6tch32lh8xxt4t5qa5ncdrycekw5slt9tza3p805lxt5p5h30z4lwwvvh2hgpmf8s6xf3nvafqdn5f53', // Example address
         description: 'A proof-of-stake blockchain platform, focusing on sustainability.'
