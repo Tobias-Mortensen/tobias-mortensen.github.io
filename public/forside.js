@@ -29,7 +29,7 @@ const cryptocurrencies = [
     {
         name: 'Bitcoin', // Original alt: "Image"
         symbol: 'BTC',
-        image: '/coins/btc.png', // Matches your original path
+        image: '/tobias-mortensen.github.io/coins/btc.png', // Matches your original path
         qrCode: '/coins/qr_btc.png', // Placeholder QR path
         address: 'bc1qquuw8yu3ft57zgssef7kysm0wayyzgllndf5hv', // From your original data-text
         description: 'The original cryptocurrency, known for its security and decentralization.'
@@ -37,7 +37,7 @@ const cryptocurrencies = [
     {
         name: 'Dogecoin', // Original alt: "Image 3" (associated with dodge.png)
         symbol: 'DOGE',
-        image: '/coins/dodge.png', // Using your original path "dodge.png"
+        image: '/tobias-mortensen.github.io/coins/dodge.png', // Using your original path "dodge.png"
         qrCode: '/coins/qr_dodge.png', // Placeholder QR path
         address: 'DFWVzGMfg6Kx1dWTc6WuPm6Fq38shjXkgm', // From your original data-text
         description: 'A fun and friendly internet currency, started as a meme.'
@@ -45,7 +45,7 @@ const cryptocurrencies = [
     {
         name: 'Litecoin', // Original alt: "Image 2"
         symbol: 'LTC',
-        image: '/coins/ltc.png', // Matches your original path
+        image: '/tobias-mortensen.github.io/coins/ltc.png', // Matches your original path
         qrCode: '/coins/qr_ltc.png', // Placeholder QR path
         address: 'LNpJWUBmjZM54AsMNKWFY73pUmfEXPznNP', // From your original data-text
         description: 'A peer-to-peer cryptocurrency, an early Bitcoin alternative.'
@@ -53,7 +53,7 @@ const cryptocurrencies = [
     {
         name: 'Solana', // Original alt: "Image 4"
         symbol: 'SOL',
-        image: '/coins/sol.png', // Matches your original path
+        image: '/tobias-mortensen.github.io/coins/sol.png', // Matches your original path
         qrCode: '/coins/qr_sol.png', // Placeholder QR path
         address: 'FCYnoCNRAnXLLsEriFGL3kBn21T1ZgZPgNNYHLZSZiYE', // From your original data-text
         description: 'A high-performance blockchain supporting scalable dApps.'
@@ -61,7 +61,7 @@ const cryptocurrencies = [
     {
         name: 'Tether', // Original alt: "Image 5"
         symbol: 'USDT',
-        image: '/coins/tether.png', // Matches your original path
+        image: '/tobias-mortensen.github.io/coins/tether.png', // Matches your original path
         qrCode: '/coins/qr_usdt.png', // Placeholder QR path
         address: '0x61B04b538bd155ee993b1B361Ad388B8d1D2c9b1', // From your original data-text
         description: 'A stablecoin pegged to the US Dollar, widely used for trading.'
@@ -69,7 +69,7 @@ const cryptocurrencies = [
     {
         name: 'XRP', // Original alt: "Image 6"
         symbol: 'XRP',
-        image: '/coins/xrp.png', // Matches your original path
+        image: '/tobias-mortensen.github.io/coins/xrp.png', // Matches your original path
         qrCode: '/coins/qr_xrp.png', // Placeholder QR path
         address: 'raMVN52QQsGspsYxULJL7rkkvfV1jrUi4W', // From your original data-text
         description: 'A digital payment protocol often used by financial institutions.'
@@ -79,7 +79,7 @@ const cryptocurrencies = [
     {
         name: 'Ethereum',
         symbol: 'ETH',
-        image: '/coins/eth.png', // Ensure you have eth.png and qr_eth.png
+        image: '/tobias-mortensen.github.io/coins/eth.png', // Ensure you have eth.png and qr_eth.png
         qrCode: '/coins/qr_eth.png',
         address: '0x61B04b538bd155ee993b1B361Ad388B8d1D2c9b1', // Example address
         description: 'A platform for decentralized applications and smart contracts.'
@@ -87,7 +87,7 @@ const cryptocurrencies = [
     {
         name: 'Cardano',
         symbol: 'ADA',
-        image: '/coins/ada.png', // Ensure you have ada.png and qr_ada.png
+        image: '/tobias-mortensen.github.io/coins/ada.png', // Ensure you have ada.png and qr_ada.png
         qrCode: '/coins/qr_ada.png',
         address: 'addr1qy04j43wcsnh60n96q6tch32lh8xxt4t5qa5ncdrycekw5slt9tza3p805lxt5p5h30z4lwwvvh2hgpmf8s6xf3nvafqdn5f53', // Example address
         description: 'A proof-of-stake blockchain platform, focusing on sustainability.'
